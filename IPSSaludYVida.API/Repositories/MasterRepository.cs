@@ -23,7 +23,7 @@ namespace IPSSaludYVida.API
                 case TablesEnum.ComunidadEtnica:
                     return await _dbContext.comunidadEtnicas.ToListAsync();
                 case TablesEnum.Departamento:
-                    return await 
+                    return await
                         _dbContext.departamentoMunicipios
                         .Where(x => x.padre!.Equals(null))
                         .OrderBy(x => x.deparMuni)
