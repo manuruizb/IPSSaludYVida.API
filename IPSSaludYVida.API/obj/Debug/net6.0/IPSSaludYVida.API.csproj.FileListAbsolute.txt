@@ -65,3 +65,4 @@ C:\Documentos\Repositorios-Manu\IPSSaludYVidaProject\IPSSaludYVida.API\IPSSaludY
 C:\Documentos\Repositorios-Manu\IPSSaludYVidaProject\IPSSaludYVida.API\IPSSaludYVida.API\obj\Debug\net6.0\IPSSaludYVida.API.pdb
 C:\Documentos\Repositorios-Manu\IPSSaludYVidaProject\IPSSaludYVida.API\IPSSaludYVida.API\obj\Debug\net6.0\IPSSaludYVida.API.genruntimeconfig.cache
 C:\Documentos\Repositorios-Manu\IPSSaludYVidaProject\IPSSaludYVida.API\IPSSaludYVida.API\obj\Debug\net6.0\ref\IPSSaludYVida.API.dll
+C:\Documentos\Repositorios-Manu\IPSSaludYVidaProject\IPSSaludYVida.API\IPSSaludYVida.API\obj\Debug\net6.0\IPSSaludYVida.API.sourcelink.json

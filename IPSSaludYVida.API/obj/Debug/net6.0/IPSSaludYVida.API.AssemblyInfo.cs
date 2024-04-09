@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IPSSaludYVida.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+592948ac622022956b43ec01575d8e1712158dec")]
 [assembly: System.Reflection.AssemblyProductAttribute("IPSSaludYVida.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IPSSaludYVida.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

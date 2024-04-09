@@ -19,12 +19,12 @@ namespace IPSSaludYVida.API.Models
         public string tipoDiagnostico { get; set; } = null!;
         public Guid idUsuario { get; set; }
 
-        public virtual causaAtencion codigoCausaAtencionNavigation { get; set; } = null!;
-        public virtual diagnostico codigoDiagnosticoNavigation { get; set; } = null!;
-        public virtual modalidadServicio codigoModalidadNavigation { get; set; } = null!;
-        public virtual prestadoresSalud codigoPrestadorSaludNavigation { get; set; } = null!;
-        public virtual viaIngresoServicio codigoViaIngresoNavigation { get; set; } = null!;
-        public virtual triage idTriageNavigation { get; set; } = null!;
-        public virtual usuario idUsuarioNavigation { get; set; } = null!;
+        public virtual causaAtencion? codigoCausaAtencionNavigation { get; set; } = null!;
+        public virtual diagnostico? codigoDiagnosticoNavigation { get; set; } = null!;
+        public virtual modalidadServicio? codigoModalidadNavigation { get; set; } = null!;
+        public virtual prestadoresSalud? codigoPrestadorSaludNavigation { get; set; } = null!;
+        public virtual viaIngresoServicio? codigoViaIngresoNavigation { get; set; } = null!;
+        public virtual triage? idTriageNavigation { get; set; } = null!;
+        public virtual usuario? idUsuarioNavigation { get; set; } = null!;
     }
 }

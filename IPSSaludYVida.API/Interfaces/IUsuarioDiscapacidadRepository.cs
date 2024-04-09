@@ -5,5 +5,7 @@ namespace IPSSaludYVida.API.Interfaces
     public interface IUsuarioDiscapacidadRepository
     {
         Task Save(usuarioDiscapacidad usuarioDiscapacidades);
+
+        Task Delete(Guid idUsuario);
     }
 }

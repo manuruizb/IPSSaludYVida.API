@@ -23,6 +23,8 @@ builder.Services.AddScoped<IVoluntadAnticipadaRepository, VoluntadAnticipadaRepo
 builder.Services.AddScoped<IUsuarioPaisesRepository, UsuarioPaisesRepository>();
 builder.Services.AddScoped<IUsuarioDiscapacidadRepository, UsuarioDiscapacidadRepository>();
 builder.Services.AddScoped<IUsuariosRepository, UsuariosRepository>();
+builder.Services.AddScoped<IServicioSaludRepository, ServicioSaludRepository>();
+builder.Services.AddScoped<ITriageRepository, TriageRepository>();
 
 ////////////////////////////////////////////////////////////////////////////////////
 
