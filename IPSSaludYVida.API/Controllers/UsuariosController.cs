@@ -115,7 +115,7 @@ namespace IPSSaludYVida.API.Controllers
                 catch (Exception e)
                 {
                     dbTransaction.Rollback();
-                    return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error", Data = e.Message });
+                    return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error.", Data = e.Message });
                 }
             }
         }
