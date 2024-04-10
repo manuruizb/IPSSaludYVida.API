@@ -12,6 +12,12 @@ namespace IPSSaludYVida.API.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public async Task<List<usuario>> GetAll()
+        {
+            return await _dbContext.usuarios.ToListAsync();
+        }
+
         public async Task<Guid> Save(usuario user)
         {
             user.idUsuario = Guid.NewGuid(); //Esto crea la llave primaria, el uniqueidentifier corresponde a GUID, porque como no hay SP, no se crea automáticamente. 

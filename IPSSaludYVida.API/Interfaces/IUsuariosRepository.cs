@@ -9,5 +9,7 @@ namespace IPSSaludYVida.API.Interfaces
         Task<usuario?> SearchByDocument(string document);
 
         Task UpdateUser(usuario user);
+
+        Task<List<usuario>> GetAll();
     }
 }

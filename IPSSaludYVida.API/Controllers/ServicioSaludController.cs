@@ -88,5 +88,32 @@ namespace IPSSaludYVida.API.Controllers
                 return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error", Data = e.Message });
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(FormularioServicioSalud formularioServicioSalud)
+        {
+            using (var dbTransaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    await _triageRepository.Update(formularioServicioSalud.triag);
+
+                    await _servicioSaludRepository.Update(formularioServicioSalud.service);
+
+                    dbTransaction.Commit();
+
+                    return Ok(new Result<string>()
+                    {
+                        Success = true,
+                        Data = "Servicio de salud actualizado con éxito."
+                    });
+                }
+                catch (Exception e)
+                {
+                    dbTransaction.Rollback();
+                    return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error.", Data = e.Message });
+                }
+            }
+        }
     }
 }

@@ -119,5 +119,24 @@ namespace IPSSaludYVida.API.Controllers
                 }
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                List<usuario> listUsers = await _usuariosRepository.GetAll();
+
+                return Ok(new Result<List<usuario>>()
+                {
+                    Success = true,
+                    Data = listUsers
+                });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error", Data = e.Message });
+            }
+        }
     }
 }

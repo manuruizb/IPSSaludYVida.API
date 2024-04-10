@@ -26,5 +26,28 @@ namespace IPSSaludYVida.API.Repositories
                 Where(x => x.idUsuario == idUsuario).
                 ToListAsync();
         }
+
+        public async Task Update(servicioSalud service)
+        {
+            var serviceDb = await _dbContext.servicioSaluds.FirstOrDefaultAsync(x => x.idServicioSalud == service.idServicioSalud);
+
+            if(serviceDb == null)
+            {
+                throw new Exception("No existe el servicio de salud.");
+            }
+
+            serviceDb.codigoPrestadorSalud = service.codigoPrestadorSalud;
+            serviceDb.fechaInicioAtencion = service.fechaInicioAtencion;
+            serviceDb.horaInicioAtencion = service.horaInicioAtencion;
+            serviceDb.codigoModalidad = service.codigoModalidad;
+            serviceDb.grupoServicio = service.grupoServicio;
+            serviceDb.entornoAtencion = service.entornoAtencion;
+            serviceDb.codigoViaIngreso = service.codigoViaIngreso;
+            serviceDb.codigoCausaAtencion = service.codigoCausaAtencion;
+            serviceDb.codigoDiagnostico = service.codigoDiagnostico;
+
+            await _dbContext.SaveChangesAsync();
+
+        }
     }
 }

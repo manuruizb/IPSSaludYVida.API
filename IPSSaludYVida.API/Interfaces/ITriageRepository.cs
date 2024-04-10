@@ -5,5 +5,7 @@ namespace IPSSaludYVida.API.Interfaces
     public interface ITriageRepository
     {
         Task<int> Save(triage triag);
+
+        Task Update(triage triag);
     }
 }

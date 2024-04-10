@@ -7,5 +7,7 @@ namespace IPSSaludYVida.API.Interfaces
         Task Save(servicioSalud service);
 
         Task<List<servicioSalud>> SearchByIdUsuario(Guid idUsuario);
+
+        Task Update(servicioSalud service);
     }
 }
