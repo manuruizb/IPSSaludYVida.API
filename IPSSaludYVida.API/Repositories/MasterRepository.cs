@@ -1,4 +1,5 @@
 ﻿using IPSSaludYVida.API.Db;
+using IPSSaludYVida.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace IPSSaludYVida.API
@@ -21,7 +22,10 @@ namespace IPSSaludYVida.API
                 case TablesEnum.CausaAtencion:
                     return await _dbContext.causaAtencions.ToListAsync();
                 case TablesEnum.ComunidadEtnica:
-                    return await _dbContext.comunidadEtnicas.ToListAsync();
+                    return await _dbContext.comunidadEtnicas
+                        .Where(x => x.codigoEtnia!.Equals(param))
+                        .OrderBy(x => x.comunidad)
+                        .ToListAsync();
                 case TablesEnum.Departamento:
                     return await
                         _dbContext.departamentoMunicipios
@@ -51,6 +55,11 @@ namespace IPSSaludYVida.API
                     return await _dbContext.ocupacions
                         .Where(x => x.padre!.Equals(param))
                         .OrderBy(x => x.ocupacion1)
+                        .Select(x => new
+                        {
+                            ocupacion = x,
+                            esPadre = _dbContext.ocupacions.Count(y => y.padre!.Equals(x.codigoOcupacion)) > 0
+                        })
                         .ToListAsync();
                 case TablesEnum.PrestadoresSalud:
                     return await _dbContext.prestadoresSaluds.ToListAsync();
