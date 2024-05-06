@@ -13,9 +13,26 @@ namespace IPSSaludYVida.API.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<List<usuario>> GetAll()
+        public async Task<int> CountAll()
         {
-            return await _dbContext.usuarios.ToListAsync();
+            return await _dbContext.usuarios.CountAsync();
+        }
+
+        public async Task<List<usuario>> GetAll(int page, int pagesize, string? searchparam)
+        {
+
+            int skip = (page - 1) * pagesize;
+
+            var query = _dbContext.usuarios.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchparam))
+            {
+                query = query.Where(u => u.numeroDocumento == searchparam);
+            }
+
+            var usuarios = await query.Skip(skip).Take(pagesize).ToListAsync();
+
+            return usuarios;
         }
 
         public async Task<Guid> Save(usuario user)

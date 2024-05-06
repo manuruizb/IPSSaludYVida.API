@@ -121,16 +121,20 @@ namespace IPSSaludYVida.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<IActionResult> GetAllUsers(int page, int pagesize, string? searchparam)
         {
             try
             {
-                List<usuario> listUsers = await _usuariosRepository.GetAll();
+                List<usuario> listUsers = await _usuariosRepository.GetAll(page, pagesize, searchparam);
 
-                return Ok(new Result<List<usuario>>()
+                return Ok(new Result<object>()
                 {
                     Success = true,
-                    Data = listUsers
+                    Data = new
+                    {
+                        rows = listUsers,
+                        count = await _usuariosRepository.CountAll()
+                    }
                 });
             }
             catch (Exception e)
