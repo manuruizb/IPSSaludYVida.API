@@ -46,8 +46,18 @@ namespace IPSSaludYVida.API.Repositories
         public async Task<usuario?> SearchByDocument(string document)
         {
             return await _dbContext.usuarios
+                .Include(u => u.idDonacionNavigation)
+                .Include(u => u.idVoluntadNavigation)
+                .Include(u => u.codigoOcupacionNavigation)
+                .Include(u => u.codigoDeparMuniNavigation)
+                .Include(u => u.usuarioPaises)!
+                    .ThenInclude(up=> up.idPaisNavigation)
+                .Include(u => u.usuarioDiscapacidads)!
+                    .ThenInclude(ud=> ud.codigoDiscapacidadNavigation)
+                .Include(u => u.codigoComunidadNavigation)
+                .Include(c=> c.codigoComunidadNavigation!.codigoEtniaNavigation)
                 .Where(x => x.numeroDocumento.Equals(document))
-                .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync();
         }
 
         public async Task UpdateUser(usuario user)

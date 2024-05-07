@@ -142,5 +142,24 @@ namespace IPSSaludYVida.API.Controllers
                 return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error", Data = e.Message });
             }
         }
+
+        [HttpGet("SearchByDocument")]
+        public async Task<IActionResult> SearchByDocument(string document)
+        {
+            try
+            {
+                var data = await _usuariosRepository.SearchByDocument(document);
+
+                return Ok(new Result<usuario>()
+                {
+                    Success = true,
+                    Data = data
+                });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error", Data = e.Message });
+            }
+        }
     }
 }

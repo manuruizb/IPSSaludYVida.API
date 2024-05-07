@@ -7,6 +7,7 @@ namespace IPSSaludYVida.API.Models
     {
         public usuario()
         {
+            idUsuario = Guid.NewGuid();
             servicioSaluds = new HashSet<servicioSalud>();
             usuarioDiscapacidads = new HashSet<usuarioDiscapacidad>();
             usuarioPaises = new HashSet<usuarioPaise>();
