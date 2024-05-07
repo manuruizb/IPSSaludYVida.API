@@ -25,8 +25,8 @@ namespace IPSSaludYVida.API.Models
         public string sexoBiologico { get; set; } = null!;
         public string identidadGenero { get; set; } = null!;
         public string codigoOcupacion { get; set; } = null!;
-        public int idDonacion { get; set; }
-        public int idVoluntad { get; set; }
+        public int? idDonacion { get; set; }
+        public int? idVoluntad { get; set; }
         public string idPaisResidencia { get; set; } = null!;
         public string codigoDeparMuni { get; set; } = null!;
         public string codigoComunidad { get; set; } = null!;

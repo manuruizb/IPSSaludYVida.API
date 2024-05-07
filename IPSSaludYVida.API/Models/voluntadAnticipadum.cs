@@ -10,7 +10,7 @@ namespace IPSSaludYVida.API.Models
             usuarios = new HashSet<usuario>();
         }
 
-        public int idVoluntad { get; set; }
+        public int? idVoluntad { get; set; }
         public bool documentoVoluntad { get; set; }
         public DateTime fecha { get; set; }
         public string codigoPrestadorSalud { get; set; } = null!;

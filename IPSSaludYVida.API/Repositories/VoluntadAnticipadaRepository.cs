@@ -12,20 +12,27 @@ namespace IPSSaludYVida.API.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<int> Save(voluntadAnticipadum voluntad)
+        public async Task<int?> Save(voluntadAnticipadum voluntad)
         {
             _dbContext.voluntadAnticipada.Add(voluntad);
             await _dbContext.SaveChangesAsync();
             return voluntad.idVoluntad;
         }
 
-        public async Task Update(voluntadAnticipadum voluntad)
+        public async Task<int?> Update(voluntadAnticipadum voluntad)
         {
             var voluntadDb = await _dbContext.voluntadAnticipada.FirstOrDefaultAsync(x => x.idVoluntad == voluntad.idVoluntad);
 
             if (voluntadDb == null)
             {
-                throw new Exception("No se encuentra un registro de voluntad anticipada.");
+                if (voluntad.idVoluntad == 0 && voluntad.documentoVoluntad)
+                {
+                    voluntad.idVoluntad = null;
+                    return await Save(voluntad);
+                }
+
+                return null;
+
             }
 
             voluntadDb.documentoVoluntad = voluntad.documentoVoluntad;
@@ -33,6 +40,8 @@ namespace IPSSaludYVida.API.Repositories
             voluntadDb.codigoPrestadorSalud = voluntad.codigoPrestadorSalud;
 
             await _dbContext.SaveChangesAsync();
+
+            return await Task.FromResult(voluntad.idVoluntad);
         }
     }
 }

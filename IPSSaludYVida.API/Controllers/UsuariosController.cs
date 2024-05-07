@@ -42,14 +42,24 @@ namespace IPSSaludYVida.API.Controllers
             {
                 try
                 {
-                    int idOposicion = await _oposicionDonacionRepository.Save(formularioUsuario.opoDonacion);
-                    int idVoluntad = await _voluntadAnticipadaRepository.Save(formularioUsuario.voluntad);
+                    int? idOposicion = null;
+                    int? idVoluntad = null;
+                    if (formularioUsuario.opoDonacion.manifestacionOposicion) {
+                        formularioUsuario.opoDonacion.idDonacion = null;
+                        idOposicion = await _oposicionDonacionRepository.Save(formularioUsuario.opoDonacion);
+                    }
+
+                    if (formularioUsuario.voluntad.documentoVoluntad) {
+                        formularioUsuario.voluntad.idVoluntad = null;
+                        idVoluntad = await _voluntadAnticipadaRepository.Save(formularioUsuario.voluntad);
+                    }
+                        
 
                     formularioUsuario.user.idDonacion = idOposicion;
                     formularioUsuario.user.idVoluntad = idVoluntad;
                     Guid idUsuario = await _usuariosRepository.Save(formularioUsuario.user);
 
-                    foreach(var item in formularioUsuario.paises)
+                    foreach (var item in formularioUsuario.paises)
                     {
                         item.idUsuario = idUsuario;
                         await _usuariosPaisesRepository.Save(item);
@@ -85,8 +95,9 @@ namespace IPSSaludYVida.API.Controllers
             {
                 try
                 {
-                    await _oposicionDonacionRepository.Update(formularioUsuario.opoDonacion);
-                    await _voluntadAnticipadaRepository.Update(formularioUsuario.voluntad);
+
+                    formularioUsuario.user.idDonacion = await _oposicionDonacionRepository.Update(formularioUsuario.opoDonacion);
+                    formularioUsuario.user.idVoluntad = await _voluntadAnticipadaRepository.Update(formularioUsuario.voluntad);
 
                     await _usuariosRepository.UpdateUser(formularioUsuario.user);
 

@@ -10,7 +10,7 @@ namespace IPSSaludYVida.API.Models
             usuarios = new HashSet<usuario>();
         }
 
-        public int idDonacion { get; set; }
+        public int? idDonacion { get; set; }
         public bool manifestacionOposicion { get; set; }
         public DateTime fecha { get; set; }
 

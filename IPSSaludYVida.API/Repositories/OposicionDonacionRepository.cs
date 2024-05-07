@@ -12,26 +12,34 @@ namespace IPSSaludYVida.API.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<int> Save(oposicionDonacion oposicion)
+        public async Task<int?> Save(oposicionDonacion oposicion)
         {
             _dbContext.oposicionDonacions.Add(oposicion);
             await _dbContext.SaveChangesAsync();
             return oposicion.idDonacion;
         }
 
-        public async Task Update(oposicionDonacion oposicion)
+        public async Task<int?> Update(oposicionDonacion oposicion)
         {
             var oposicionDb = await _dbContext.oposicionDonacions.FirstOrDefaultAsync(x => x.idDonacion.Equals(oposicion.idDonacion));
 
             if (oposicionDb == null)
             {
-                throw new Exception("No se encuentra un registro de oposición a la donación.");
+                if (oposicion.idDonacion == 0 && oposicion.manifestacionOposicion) {
+                    oposicion.idDonacion = null;
+                    return await Save(oposicion);
+                }
+
+
+                return null;
             }
 
             oposicionDb.manifestacionOposicion = oposicion.manifestacionOposicion;
             oposicionDb.fecha = oposicion.fecha;
 
             await _dbContext.SaveChangesAsync();
+
+            return await Task.FromResult(oposicion.idDonacion);
         }
     }
 }

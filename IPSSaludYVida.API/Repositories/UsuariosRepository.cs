@@ -85,6 +85,8 @@ namespace IPSSaludYVida.API.Repositories
             userDb.codigoComunidad = user.codigoComunidad;
             userDb.zonaResidencia = user.zonaResidencia;
             userDb.codigoEntidad = user.codigoEntidad;
+            userDb.idDonacion = user.idDonacion;
+            userDb.idVoluntad= user.idVoluntad;
 
             await _dbContext.SaveChangesAsync();
         }
