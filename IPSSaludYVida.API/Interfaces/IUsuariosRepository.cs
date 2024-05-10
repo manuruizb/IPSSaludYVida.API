@@ -11,6 +11,7 @@ namespace IPSSaludYVida.API.Interfaces
         Task UpdateUser(usuario user);
 
         Task<List<usuario>> GetAll(int page, int pagesize, string? searchparam);
+
         Task<int> CountAll();
     }
 }

@@ -64,7 +64,7 @@ namespace IPSSaludYVida.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllServiceByDocument(string document)
+        public async Task<IActionResult> GetAllServiceByDocument(string document, int page, int pagesize)
         {
             try
             {
@@ -75,12 +75,16 @@ namespace IPSSaludYVida.API.Controllers
                     return NotFound(new Result<dynamic>() { Message = "No existe un usuario con ese número de documento." });
                 }
 
-                List<servicioSalud> listService = await _servicioSaludRepository.SearchByIdUsuario(user.idUsuario);
+                List<servicioSalud> listService = await _servicioSaludRepository.SearchByIdUsuario(user.idUsuario, page, pagesize);
 
-                return Ok(new Result<List<servicioSalud>>()
+                return Ok(new Result<object>()
                 {
                     Success = true,
-                    Data = listService
+                    Data = new
+                    {
+                        rows = listService,
+                        count = await _servicioSaludRepository.CountAll()
+                    }
                 });
             }
             catch (Exception e)
@@ -113,6 +117,25 @@ namespace IPSSaludYVida.API.Controllers
                     dbTransaction.Rollback();
                     return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error.", Data = e.Message });
                 }
+            }
+        }
+
+        [HttpGet("SearchByIdService")]
+        public async Task<IActionResult> SearchByIdService(Guid idServicioSalud)
+        {
+            try
+            {
+                var data = await _servicioSaludRepository.SearchByIdService(idServicioSalud);
+
+                return Ok(new Result<servicioSalud>()
+                {
+                    Success = true,
+                    Data = data
+                });
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, new Result<dynamic>() { Message = "Ha ocurrido un error", Data = e.Message });
             }
         }
     }

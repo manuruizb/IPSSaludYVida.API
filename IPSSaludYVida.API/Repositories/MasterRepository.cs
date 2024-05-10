@@ -42,6 +42,11 @@ namespace IPSSaludYVida.API
                     return await _dbContext.diagnosticos
                         .Where(x => x.padre!.Equals(param))
                         .OrderBy(x => x.codigoDiagnostico)
+                        .Select(x => new
+                        {
+                            diagnostico = x,
+                            esPadre = _dbContext.diagnosticos.Count(y => y.padre!.Equals(x.codigoDiagnostico)) > 0
+                        })
                         .ToListAsync();
                 case TablesEnum.Discapacidades:
                     return await _dbContext.discapacidades.ToListAsync();

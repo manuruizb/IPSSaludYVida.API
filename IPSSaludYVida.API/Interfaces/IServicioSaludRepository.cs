@@ -6,8 +6,12 @@ namespace IPSSaludYVida.API.Interfaces
     {
         Task Save(servicioSalud service);
 
-        Task<List<servicioSalud>> SearchByIdUsuario(Guid idUsuario);
+        Task<List<servicioSalud>> SearchByIdUsuario(Guid idUsuario, int page, int pagesize);
 
         Task Update(servicioSalud service);
+
+        Task<int> CountAll();
+
+        Task<servicioSalud?> SearchByIdService(Guid idServicioSalud);
     }
 }
